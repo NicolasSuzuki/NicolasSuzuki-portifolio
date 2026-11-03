@@ -2,7 +2,7 @@ import { createServer } from "node:http";
 import { createReadStream, existsSync, statSync } from "node:fs";
 import { extname, resolve, sep } from "node:path";
 
-const root = resolve("out");
+const root = resolve("dist");
 if (!existsSync(resolve(root, "index.html"))) {
   console.error("Build ausente. Execute npm run build antes de npm start.");
   process.exit(1);

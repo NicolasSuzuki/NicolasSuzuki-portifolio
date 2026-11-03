@@ -6,7 +6,7 @@ Repositório: [NicolasSuzuki/NicolasSuzuki-portifolio](https://github.com/Nicola
 
 ## Executar
 
-Requer Node.js 20.9 ou superior.
+Requer Node.js 22.x, a versão principal usada para desenvolvimento e publicação.
 
 ```sh
 npm install
@@ -21,7 +21,7 @@ npm run build
 npm start
 ```
 
-O build gera um site estático em `out/`. `npm start` serve esse build localmente. Não há banco, formulário, rastreadores ou credenciais no frontend.
+O build gera um site estático em `dist/`. `npm start` serve esse build localmente. Não há banco, formulário, rastreadores ou credenciais no frontend.
 
 ## Estrutura
 
@@ -31,6 +31,7 @@ O build gera um site estático em `out/`. `npm start` serve esse build localment
 - `src/app/layout.tsx`: metadados, idioma inicial e configurações de indexação.
 - `public/icon.svg`: ícone original do site.
 - `scripts/serve.mjs`: prévia do build estático.
+- `render.yaml`: configuração de publicação como Static Site no Render.
 
 ## Direção visual
 
@@ -46,7 +47,30 @@ A seção **IA no processo. Critério na entrega.** apresenta como uso IA em inv
 
 O projeto foi preparado para exportação estática. A indexação está desativada em `src/app/layout.tsx` enquanto o conteúdo está em revisão; antes de publicar um site, definir o endereço definitivo e atualizar metadados e indexação.
 
-O projeto pode ser hospedado em qualquer plataforma compatível com os arquivos de `out/`, mantendo os assets de `_next/`.
+O projeto pode ser hospedado em qualquer plataforma compatível com os arquivos de `dist/`, mantendo os assets de `_next/`.
+
+### Publicar no Render
+
+[Abrir o serviço no Render](https://dashboard.render.com/static/srv-dbkoo23ncjis73euedc0)
+
+O serviço existente usa a branch `main` e publica a pasta `dist`. O `render.yaml` descreve a mesma configuração para manter a hospedagem reproduzível. A exportação é configurada nativamente no Next.js com `output: "export"` e `distDir: "dist"`.
+
+Se preferir criar pelo painel, escolha **New → Static Site** e informe:
+
+| Campo | Valor |
+| --- | --- |
+| Repositório | `NicolasSuzuki/NicolasSuzuki-portifolio` |
+| Branch | `main` |
+| Root Directory | Em branco: o projeto está na raiz do repositório |
+| Build Command | `npm ci --include=dev && npm run build` |
+| Publish Directory | `dist` |
+| Variável de ambiente opcional | `NEXT_TELEMETRY_DISABLED=1` |
+
+O Node é definido pelo campo `engines` do `package.json`. O Static Site publica diretamente o conteúdo de `dist/`, sem executar um comando de inicialização.
+
+Deploys automáticos estão habilitados: cada push para `main` dispara uma nova publicação. Para repetir um deploy sem alterar o código, use **Manual Deploy → Deploy latest commit** no painel.
+
+Referências: [Next.js no Render](https://render.com/docs/deploy-nextjs-app), [Blueprints](https://render.com/docs/blueprint-spec) e [versão do Node](https://render.com/docs/node-version).
 
 ## Verificação
 
