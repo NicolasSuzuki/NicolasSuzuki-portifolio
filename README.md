@@ -27,6 +27,10 @@ O build gera um site estático em `dist/`. `npm start` serve esse build localmen
 
 - `src/content/portfolio.ts`: dados, textos, idiomas e cases.
 - `src/components/portfolio.tsx`: página, navegação, previews ilustrativos e dialog de detalhes.
+- `src/components/case-study.tsx` e `src/content/case-studies.ts`: páginas completas, etapas, evidências e traduções dos cases.
+- `src/app/cases/[slug]/` e `src/app/en/cases/[slug]/`: exportação estática dos cases em português e inglês.
+- `public/cases/skills-lab/`: recortes reais dos wireframes do Figma, com contexto e origem no case.
+- `public/fonts/`: fontes locais e licenças SIL Open Font License.
 - `public/downloads/`: currículos em português e inglês, com texto selecionável e links.
 - `scripts/generate-resumes.mjs` e `scripts/generate_resumes.py`: geração dos currículos a partir do conteúdo público do site.
 - `src/app/globals.css`: identidade visual, tokens e breakpoints.
@@ -37,9 +41,13 @@ O build gera um site estático em `dist/`. `npm start` serve esse build localmen
 
 ## Direção visual
 
-Fundo grafite, contraste em verde claro, tipografia editorial, monograma construído em código e projetos com composições visuais próprias. DM Sans e Manrope são carregadas do Google Fonts, com fontes de sistema como fallback. Nenhuma fotografia é necessária para a primeira versão.
+Fundo grafite, contraste em verde claro, tipografia editorial, monograma construído em código e projetos com composições visuais próprias. DM Sans e Manrope são servidas localmente, com preload, fontes de sistema como fallback e licenças em `public/fonts/`.
 
 Os previews dos projetos são ilustrações, identificadas como tal. Não representam screenshots nem comprovam entregas. Os detalhes de cada case informam contexto, participação, escopo e estado atual.
+
+Skills Lab e Awaken têm modais resumidos e páginas completas. Skills Lab apresenta cinco etapas e três recortes de wireframes; as legendas distinguem propostas históricas das regras posteriores. Awaken apresenta decisões de frontend, temas e infraestrutura com limites de integração. O case deste portfólio mostra uso de IA, revisão de direção e commits públicos. Todos possuem versões em português e inglês, links de retorno e navegação por seções.
+
+As imagens dos wireframes preservam o idioma original. A versão inglesa contém descrição e contexto traduzidos. Os arquivos internos e o histórico bruto dos projetos não são distribuídos.
 
 A seleção distingue Skills Lab (freelance), uma plataforma educacional (experiência corporativa anonimizada) e Awaken (projeto pessoal com o irmão de Nicolas). Os cases corporativos não são associados aos empregadores da timeline.
 
