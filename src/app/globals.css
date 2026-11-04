@@ -83,3 +83,4 @@
 
 /* Contrast corrections measured by the mobile accessibility audit. */
 .mock-small-label{color:#43592f}.document-type{color:#466052}
+.project-button{position:relative}.project-title-button{background:none;padding:0;width:100%;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:15px;letter-spacing:inherit;line-height:inherit}.project-title-button::after{content:"";position:absolute;inset:0}.project-button:focus-within .project-image-arrow{opacity:1;transform:none}.project-button:focus-within{outline:2px solid var(--accent);outline-offset:6px}.project-title-button:focus-visible{outline:none}
