@@ -105,7 +105,7 @@ export default function Portfolio() {
       <nav className={menuOpen ? "main-nav is-open" : "main-nav"} aria-label={locale === "pt" ? "Navegação principal" : "Main navigation"} id="main-navigation">
         {["projetos", "sobre", "processo-ia", "experiencia"].map((id, i) => <a href={`#${id}`} key={id} onClick={() => setMenuOpen(false)}>{c.nav[i]}</a>)}
       </nav>
-      <div className="header-actions"><button className="language-switch" onClick={() => setLocale(locale === "pt" ? "en" : "pt")} aria-label={"PT / EN — " + c.language}><span className={locale === "pt" ? "active" : ""}>PT</span><span className="language-divider">/</span><span className={locale === "en" ? "active" : ""}>EN</span></button><a href="#contato" className="header-contact">{c.contactNav}<Arrow diagonal/></a><button className="menu-toggle" aria-label={menuOpen ? c.close : c.menu} aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}><span/><span/></button></div>
+      <div className="header-actions"><button className="language-switch" onClick={() => setLocale(locale === "pt" ? "en" : "pt")} aria-label={"PT/EN — " + c.language}><span className={locale === "pt" ? "active" : ""}>PT</span><span className="language-divider">/</span><span className={locale === "en" ? "active" : ""}>EN</span></button><a href="#contato" className="header-contact">{c.contactNav}<Arrow diagonal/></a><button className="menu-toggle" aria-label={menuOpen ? c.close : c.menu} aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}><span/><span/></button></div>
     </div></header>
 
     <main id="main">
