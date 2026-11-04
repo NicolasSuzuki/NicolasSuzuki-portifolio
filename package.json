@@ -10,6 +10,7 @@
     "build": "next build",
     "start": "node scripts/serve.mjs",
     "preview": "node scripts/serve.mjs",
+    "resumes": "node scripts/generate-resumes.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

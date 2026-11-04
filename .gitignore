@@ -9,4 +9,5 @@ dist/
 CONTENT_REVIEW.md
 VALIDATION.md
 tmp/
+output/
 *.log
