@@ -26,7 +26,10 @@ O build gera um site estático em `dist/`. `npm start` serve esse build localmen
 ## Estrutura
 
 - `src/content/portfolio.ts`: dados, textos, idiomas e cases.
-- `src/components/portfolio.tsx`: página, navegação, previews ilustrativos e dialog de detalhes.
+- `src/components/portfolio.tsx`: composição da página e navegação.
+- `src/components/project-visual.tsx`: capturas e diagramas dos projetos.
+- `src/components/project-dialog.tsx`: detalhes dos cases em dialog nativo.
+- `src/components/interface-demo.tsx`: demonstração interativa com estados locais.
 - `src/app/globals.css`: identidade visual, tokens e breakpoints.
 - `src/app/layout.tsx`: metadados, idioma inicial e configurações de indexação.
 - `public/icon.svg`: ícone original do site.
@@ -35,13 +38,13 @@ O build gera um site estático em `dist/`. `npm start` serve esse build localmen
 
 ## Direção visual
 
-Fundo grafite, contraste em verde claro, tipografia editorial, monograma construído em código e projetos com composições visuais próprias. DM Sans e Manrope são carregadas do Google Fonts, com fontes de sistema como fallback. Nenhuma fotografia é necessária para a primeira versão.
+Fundo grafite, texto claro e verde contido em ações e detalhes. A composição editorial dá destaque ao nome e aos projetos, com Manrope carregada do Google Fonts e fontes de sistema como fallback.
 
-Os previews dos projetos são ilustrações, identificadas como tal. Não representam screenshots nem comprovam entregas. Os detalhes de cada case informam contexto, participação, escopo e estado atual.
+Awaken apresenta capturas reais da tela de acesso em desktop e celular, obtidas no ambiente local de demonstração com campos vazios. Elas não mostram fluxos autenticados nem um produto finalizado. Skills Lab e a plataforma educacional usam diagramas identificados como representações do escopo. Os detalhes de cada case informam contexto, participação, decisões técnicas, escopo e estado atual.
 
 A seleção distingue Skills Lab (freelance), uma plataforma educacional (experiência corporativa anonimizada) e Awaken (projeto pessoal com o irmão de Nicolas). Os cases corporativos não são associados aos empregadores da timeline.
 
-A seção **IA no processo. Critério na entrega.** apresenta como uso IA em investigação, prototipação, desenvolvimento e revisão, com definição de contexto, critérios de aceite e verificação técnica das entregas.
+A seção **Como trabalho com IA** apresenta definição de contexto, avaliação de alternativas e verificação técnica. A demonstração **Como uma interface reage** permite combinar duas larguras e três estados de um cartão do próprio portfólio. O layout se reorganiza conforme o espaço disponível; carregamento mantém a estrutura e a recuperação de erro retorna o foco para a ação do cartão. Essa demonstração não representa uma entrega do aplicativo Awaken.
 
 ## Publicação
 
@@ -78,6 +81,8 @@ Referências: [Next.js no Render](https://render.com/docs/deploy-nextjs-app), [B
 npm run typecheck
 npm run build
 ```
+
+Conferir a prévia em 390, 768 e 1280 px, as seis combinações da demonstração, navegação por teclado, fechamento dos dialogs com retorno de foco, os dois idiomas e contato. As transições respeitam `prefers-reduced-motion`.
 
 As notas editoriais locais, os documentos pessoais e as configurações locais de hospedagem não fazem parte deste repositório.
 
