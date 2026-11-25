@@ -1,88 +1,453 @@
 import type { Locale } from "./portfolio";
 
 type Evidence = { src: string; width: number; height: number; alt: string; title: string; text: string; source?: string };
-export type Study = { name: string; title: string; kind: string; intro: string; role: string; status: string; stack: string[]; stages: { title: string; text: string }[]; evidence?: Evidence[]; flow?: string[]; result: string; limits: string; links?: { label: string; href: string }[] };
-export const slugs = ["skills-lab", "awaken", "portfolio-com-ia"] as const;
+export type Study = { name: string; title: string; kind: string; intro: string; role: string; status: string; stack: string[]; stages: { title: string; text: string }[]; evidence?: Evidence[]; flow?: string[]; productImages?: Evidence[]; outcomes?: { title: string; text: string }[]; result: string; limits: string; links?: { label: string; href: string }[] };
+export const slugs = ["skills-lab", "assisted-form", "awaken", "portfolio-com-ia"] as const;
 export type StudySlug = typeof slugs[number];
 export const studyPath = (slug: string, locale: Locale) => `${locale === "en" ? "/en" : ""}/cases/${slug}/`;
 export const studies: Record<Locale, Record<StudySlug, Study>> = {
-  pt: {
+  "pt": {
     "skills-lab": {
-      name: "Skills Lab", title: "Do frontend recebido à evolução da plataforma.", kind: "Freelance · Produto e desenvolvimento fullstack",
-      intro: "Organizar uma ideia, alinhar a jornada com as fundadoras e conectar a experiência a uma base real de aplicação. Um recorte do trabalho documentado entre agosto e novembro de 2026.",
-      role: "Definição do MVP, wireframes no Figma, alinhamento com as clientes, arquitetura e desenvolvimento fullstack com apoio de IA, revisão e validação.", status: "Em desenvolvimento e testes", stack: ["React", "TypeScript", "NestJS", "Prisma", "PostgreSQL", "Figma"],
-      stages: [
-        { title: "Entender o ponto de partida", text: "Recebi um frontend existente com páginas demonstrativas, dados simulados e estado local. Mapeei os fluxos em wireframes de baixa fidelidade para compreender o que estava disponível e ter uma base visual para conversar sobre o produto." },
-        { title: "Organizar o MVP com as clientes", text: "Ajudei a concentrar a primeira versão em uma jornada B2C de Comunicação e Oratória. As conversas, documentos e wireframes apoiaram a separação entre descoberta e compra, primeiro acesso e rotina de aprendizagem. Traduzi os alinhamentos em requisitos e tarefas." },
-        { title: "Evoluir os wireframes", text: "A proposta passou a detalhar assessment, apresentação inicial, práticas, feedback, desafio final, evolução e PDI. Os wireframes serviram para discutir regras e próximos passos antes de investir em acabamento visual. Eles registram propostas daquele momento; algumas regras evoluíram depois." },
-        { title: "Conectar a experiência à implementação", text: "Participei das escolhas de NestJS, Prisma e PostgreSQL, com Controller → Service → Repository e entregas incrementais. O trabalho incluiu autenticação, sessões, persistência da jornada, integrações e backoffice para administrar conteúdos e acompanhar participantes. Usei IA no desenvolvimento, conduzindo contexto, revisão e verificações." },
-        { title: "Revisar e validar", text: "Transformei retornos das fundadoras em ajustes de fluxo e interface. Relatórios de QA registram testes com API e banco reais para progresso, retomada de rascunhos, vídeos privados, PDI e certificado, incluindo desktop e celular emulado. A revisão visual também cobriu estados de interface, teclado e acessibilidade automatizada." },
+      "name": "Skills Lab",
+      "title": "De um protótipo a uma jornada que guarda o progresso.",
+      "kind": "Freelance · Produto e desenvolvimento fullstack",
+      "intro": "Recebi um frontend com telas demonstrativas e dados simulados. No freelance, ajudei a definir o MVP com as fundadoras e trabalhei na evolução da jornada para uma aplicação com API, banco e retomada de atividades.",
+      "role": "Desenvolvimento full stack, definição do MVP, wireframes e alinhamento com as clientes, com apoio de IA na implementação e revisão.",
+      "status": "MVP em desenvolvimento e testes",
+      "stack": [
+        "React",
+        "TypeScript",
+        "NestJS",
+        "Prisma",
+        "PostgreSQL",
+        "Figma"
       ],
-      evidence: [
-        { src: "/cases/skills-lab/as-is.png", width: 1024, height: 735, title: "Mapeamento do que foi recebido", alt: "Wireframe de baixa fidelidade do hub público existente, com apresentação e catálogo de verticais", text: "Página ComoEsta hoje: representação do frontend recebido para entender a estrutura. É um wireframe de análise, não uma captura da aplicação.", source: "https://www.figma.com/design/ETxeJ5InqQAXxoVXFCCrLV?node-id=5-3" },
-        { src: "/cases/skills-lab/journey.png", width: 2700, height: 1760, title: "Da lista de telas à jornada", alt: "Mapa da jornada proposta em seis etapas: descoberta, compra, acesso, primeiro acesso, aprendizado e conclusão", text: "A versão posterior explicita os papéis e a próxima ação do aluno. O feedback externo aparece como requisito nesta versão do wireframe; depois tornou-se opcional, conforme o relatório de QA. O mapa representa uma etapa do processo.", source: "https://www.figma.com/design/wHIxu3tb3m60tluuLrCozb?node-id=10-2" },
-        { src: "/cases/skills-lab/onboarding.png", width: 760, height: 560, title: "Uma conversa transformada em fluxo", alt: "Wireframe Me conheça com pergunta sobre desafios de comunicação, alternativas e opções de continuar ou salvar para depois", text: "O primeiro acesso detalha perguntas, escolhas e retomada. Esse nível de definição ajuda a discutir comportamento com as clientes antes da implementação.", source: "https://www.figma.com/design/wHIxu3tb3m60tluuLrCozb?node-id=47-4" },
+      "stages": [
+        {
+          "title": "Entender o que já existia",
+          "text": "Mapeei o frontend recebido em wireframes para conversar sobre os fluxos com as fundadoras. A partir dessas conversas, transformei decisões de produto em requisitos e tarefas."
+        },
+        {
+          "title": "Conectar as etapas",
+          "text": "Trabalhei na evolução de autenticação, persistência da jornada, integrações e backoffice com React, NestJS, Prisma e PostgreSQL."
+        },
+        {
+          "title": "Revisar o comportamento",
+          "text": "Além das telas, revisei o que acontece ao salvar, sair, voltar e concluir uma etapa. O PDI é um exemplo dessa ligação entre interface, API e regras da jornada."
+        }
       ],
-      result: "A evolução documentada conecta um protótipo com dados simulados a fluxos persistidos e testados, além de uma frente administrativa e preparação para teste fechado online. Os wireframes e requisitos criaram uma referência comum para discutir as entregas com as fundadoras.",
-      limits: "Os testes demonstram funcionamento nos cenários exercitados. Não comprovam impacto comercial ou aprendizagem. Pagamentos e e-mails reais, operação definitiva de mídia e parte da validação pedagógica ainda estavam pendentes no recorte consultado. Dados de participantes, contas de teste e documentos internos não são publicados.",
+      "evidence": [
+        {
+          "src": "/cases/skills-lab/as-is.png",
+          "width": 1024,
+          "height": 735,
+          "title": "Mapeamento do que foi recebido",
+          "alt": "Wireframe de baixa fidelidade do hub público existente, com apresentação e catálogo de verticais",
+          "text": "Página ComoEsta hoje: representação do frontend recebido para entender a estrutura. É um wireframe de análise, não uma captura da aplicação.",
+          "source": "https://www.figma.com/design/ETxeJ5InqQAXxoVXFCCrLV?node-id=5-3"
+        },
+        {
+          "src": "/cases/skills-lab/journey.png",
+          "width": 2700,
+          "height": 1760,
+          "title": "Da lista de telas à jornada",
+          "alt": "Mapa da jornada proposta em seis etapas: descoberta, compra, acesso, primeiro acesso, aprendizado e conclusão",
+          "text": "A versão posterior explicita os papéis e a próxima ação do aluno. O feedback externo aparece como requisito nesta versão do wireframe; depois tornou-se opcional, conforme o relatório de QA. O mapa representa uma etapa do processo.",
+          "source": "https://www.figma.com/design/wHIxu3tb3m60tluuLrCozb?node-id=10-2"
+        },
+        {
+          "src": "/cases/skills-lab/onboarding.png",
+          "width": 760,
+          "height": 560,
+          "title": "Uma conversa transformada em fluxo",
+          "alt": "Wireframe Me conheça com pergunta sobre desafios de comunicação, alternativas e opções de continuar ou salvar para depois",
+          "text": "O primeiro acesso detalha perguntas, escolhas e retomada. Esse nível de definição ajuda a discutir comportamento com as clientes antes da implementação.",
+          "source": "https://www.figma.com/design/wHIxu3tb3m60tluuLrCozb?node-id=47-4"
+        }
+      ],
+      "result": "A jornada evoluiu de telas demonstrativas para fluxos com persistência e verificações funcionais. No PDI, o aluno passou a poder retomar uma edição parcial em vez de depender apenas do foco já confirmado.",
+      "limits": "O MVP continua em desenvolvimento. Pagamentos e e-mails reais, operação definitiva de mídia e parte da validação pedagógica ainda estavam pendentes no recorte apresentado.",
+      "productImages": [
+        {
+          "src": "/cases/skills-lab/application-pdi.png",
+          "width": 1440,
+          "height": 1000,
+          "title": "O PDI na aplicação",
+          "alt": "Tela real do Skills Lab mostrando um plano de desenvolvimento concluído com uma ação de exemplo",
+          "text": "Captura de 08/10/2026, em ambiente de teste, com conteúdo de exemplo. Mostra o plano concluído nessa etapa do projeto; a evolução posterior dos rascunhos está descrita abaixo."
+        }
+      ],
+      "outcomes": [
+        {
+          "title": "Continuar depois",
+          "text": "O rascunho é recuperado ao abrir o PDI, incluindo o item que estava sendo editado."
+        },
+        {
+          "title": "Concluir no momento certo",
+          "text": "A API verifica os pré-requisitos e impede finalizar o plano com edição pendente."
+        },
+        {
+          "title": "Uma referência comum",
+          "text": "Wireframes e requisitos ajudaram a discutir escopo e comportamento com as fundadoras."
+        }
+      ]
     },
-    awaken: {
-      name: "Awaken", title: "Universos diferentes. A mesma experiência de treino.", kind: "Projeto pessoal · Em colaboração com meu irmão",
-      intro: "Um aplicativo fitness com progressão e identidades visuais distintas. O desafio de frontend é dar personalidade aos universos mantendo comportamento, dados e regras consistentes.", role: "Frontend, infraestrutura, decisões de experiência e tematização. Desenvolvimento em colaboração com meu irmão, responsável pela frente de backend.", status: "Em desenvolvimento · Integração completa pendente", stack: ["Next.js", "TypeScript", "PWA", "Design System", "API contracts"],
-      stages: [
-        { title: "Conferir o plano contra o trabalho real", text: "No histórico de planejamento, pedi a comparação do guia do produto com as sprints e o código existente. A revisão separou frontend implementado, contratos, backend, integração e QA. Isso evitou tratar telas com mocks como jornadas concluídas." },
-        { title: "Dar identidade além da troca de cores", text: "Questionei a semelhança entre os temas e pedi tarefas específicas para tokens, tipografia, linguagem, componentes e estados. A documentação atual organiza os universos Caçador, Fitness, Spotlight e Vigília em tokens semânticos e um dicionário de textos por intenção." },
-        { title: "Preservar as regras entre universos", text: "A decisão arquitetural é separar apresentação de domínio: trocar um universo muda a composição e os nomes visíveis, preservando progresso, permissões e contratos. Componentes compartilhados consomem tokens em vez de espalhar condições de tema pelo código." },
-        { title: "Explicitar limites de integração e conexão", text: "A documentação define a API como autoridade das regras e prevê sessão em cookie HttpOnly por meio do servidor Next.js. A estratégia offline evita cache de mutações e reenvios silenciosos; ao reconectar, a ação é retomada explicitamente. A validação integrada continua como etapa necessária." },
-      ], flow: ["Regra compartilhada", "Componente semântico", "Tema e linguagem", "Mesma ação do usuário"],
-      result: "O histórico sustenta minha participação na direção de frontend, infraestrutura e organização das entregas. Os documentos locais registram componentes temáticos, contratos e verificações locais, com critérios específicos para integração e beta.",
-      limits: "Este é um recorte de decisões registradas no histórico e na documentação local. Integração completa, fluxo autenticado ponta a ponta e verificação em aparelhos reais estavam pendentes nos registros consultados. Não apresento essas decisões como comprovação de um produto finalizado nem atribuo a mim o trabalho de backend do meu irmão.",
+    "assisted-form": {
+      "name": "Formulário assistido",
+      "title": "Preencher como sugestão. Deixar a decisão com o usuário.",
+      "kind": "Experiência corporativa · Recorte anonimizado",
+      "intro": "O cliente pediu que um evento preenchesse o formulário inteiro. Propus manter os valores editáveis e avisar que eram sugestões. Implementei esse comportamento.",
+      "role": "Proposta e implementação do preenchimento editável, com aviso para o usuário.",
+      "status": "Implementado em projeto de cliente",
+      "stack": [
+        "Frontend",
+        "Formulários",
+        "Preenchimento assistido",
+        "Visão de produto"
+      ],
+      "stages": [
+        {
+          "title": "Rever o pedido",
+          "text": "Sugeri oferecer o preenchimento como um começo útil, sem impedir que o usuário adaptasse o conteúdo."
+        },
+        {
+          "title": "Dar contexto ao prompt",
+          "text": "Propus combinar o título do evento com uma frase predefinida e começar essa composição no frontend."
+        },
+        {
+          "title": "Planejar a evolução",
+          "text": "Para ampliar a personalização e avaliar alternativas com métricas, propus uma evolução no backend. Essa parte ficou como próximo passo."
+        }
+      ],
+      "result": "O formulário ganhou um preenchimento inicial que o usuário pode revisar. Minha contribuição foi propor esse comportamento e implementá-lo, preservando espaço para a decisão de quem usa.",
+      "limits": "Preservo a identidade, as telas e o código do cliente. O exemplo interativo deste portfólio usa texto fictício e não executa IA. Não há métricas de impacto para este recorte.",
+      "outcomes": [
+        {
+          "title": "Um começo editável",
+          "text": "Os valores iniciais ajudam a iniciar o preenchimento e continuam disponíveis para revisão."
+        },
+        {
+          "title": "Uma indicação clara",
+          "text": "O aviso explica que o conteúdo é uma sugestão."
+        }
+      ]
+    },
+    "awaken": {
+      "name": "Awaken",
+      "title": "Universos diferentes. A mesma experiência de treino.",
+      "kind": "Projeto pessoal · Em colaboração com meu irmão",
+      "intro": "Desenvolvo o frontend e cuido da infraestrutura do Awaken com meu irmão, responsável pelo backend. O aplicativo combina treinos, progressão e diferentes identidades visuais.",
+      "role": "Frontend, infraestrutura, contratos de integração e decisões sobre experiência e temas.",
+      "status": "Integração local validada · Preparação para beta",
+      "stack": [
+        "Next.js",
+        "TypeScript",
+        "Design System",
+        "PWA",
+        "API contracts"
+      ],
+      "stages": [
+        {
+          "title": "Construir com contratos",
+          "text": "Usei contratos e mocks para avançar nas interfaces enquanto o backend evoluía. Depois, a auditoria local percorreu o fluxo principal com API e PostgreSQL reais."
+        },
+        {
+          "title": "Separar o que muda do que permanece",
+          "text": "Organizei a aparência em tokens semânticos e o vocabulário em dicionários tipados. Assim, os componentes podem adaptar a apresentação sem concentrar regras de treino."
+        },
+        {
+          "title": "Usar falhas para definir o próximo passo",
+          "text": "A auditoria também encontrou ajustes de recuperação de falhas, dados locais e teclado. Esses cenários passaram a fazer parte dos critérios antes de liberar o beta."
+        }
+      ],
+      "result": "O frontend tem quatro universos visuais, com preferências e linguagem separadas. A integração principal já foi exercitada localmente; agora o trabalho é corrigir os cenários que bloqueiam o beta e validar nos aparelhos reais.",
+      "limits": "O aplicativo ainda não está pronto para o beta. Recuperação de falhas, isolamento de dados locais e teclado têm ajustes; aparelhos reais e infraestrutura publicada continuam pendentes.",
+      "productImages": [
+        {
+          "src": "/cases/awaken/application-checkin.png",
+          "width": 1082,
+          "height": 2202,
+          "title": "Registro de atividade no celular",
+          "alt": "Tela real do Awaken em conta sintética de auditoria, com opções de check-in rápido, exercícios e plano",
+          "text": "Captura da auditoria local de 23/11/2026 com conta e dados fictícios. A tela oferece caminhos diferentes para registrar um treino."
+        }
+      ],
+      "outcomes": [
+        {
+          "title": "Quatro identidades",
+          "text": "Fitness, Caçador, Spotlight e Vigília compartilham componentes e contratos."
+        },
+        {
+          "title": "Preferência independente",
+          "text": "Tema visual e linguagem são tratados separadamente, com compatibilidade para valores antigos."
+        },
+        {
+          "title": "Um fluxo integrado",
+          "text": "Cadastro, plano, treino e publicação foram verificados com API e PostgreSQL em ambiente local."
+        }
+      ]
     },
     "portfolio-com-ia": {
-      name: "Este portfólio", title: "Como conduzi uma entrega com IA — e revisei a direção.", kind: "Código público · Processo de desenvolvimento",
-      intro: "Um exemplo verificável de contexto, avaliação de alternativas e correção de rumo. A IA participou da implementação; as decisões de direção e aceite foram minhas.", role: "Definição do objetivo, restrições de conteúdo, referências, avaliação visual e orientação das revisões.", status: "Publicado · Código público", stack: ["Next.js", "TypeScript", "Português / English", "Static export"],
-      stages: [
-        { title: "Definir contexto e limites", text: "Forneci meu histórico, referências e a relação correta entre os projetos. Defini o que poderia ser apresentado publicamente e pedi que a IA descrevesse meu processo com responsabilidade, sem inventar resultados." },
-        { title: "Explorar uma alternativa", text: "Um redesign editorial substituiu a abertura com monograma por um nome em grande escala e reorganizou os projetos. A proposta foi implementada e publicada para avaliação. O commit permite consultar essa alternativa no código." },
-        { title: "Avaliar e corrigir a direção", text: "Após avaliar o conjunto, expliquei que preferia a versão anterior. Recuperamos aquela identidade e incorporamos ajustes de recrutamento: especialidade clara, experiência acessível, currículos bilíngues e contribuição individual nos cases." },
-        { title: "Verificar antes de aceitar", text: "A implementação foi conferida com TypeScript, build estático, idiomas, teclado, retorno de foco dos dialogs e larguras de 390, 768 e 1280 px. O deploy e os arquivos públicos também foram verificados. Esses controles cobrem cenários definidos, sem garantir ausência de falhas." },
-      ], result: "O exemplo mostra minha participação na definição do problema, no julgamento da proposta e na revisão da entrega. Código e histórico de commits permitem comparar as alternativas, sem expor projetos de clientes.", limits: "Não atribuo métricas de produtividade à IA. Uma sugestão implementada ainda precisa ser avaliada quanto a comportamento, manutenção e adequação ao objetivo. Os commits abaixo são evidências do processo, não uma medida de impacto profissional.",
-      links: [{ label: "Comparar o redesign editorial", href: "https://github.com/NicolasSuzuki/NicolasSuzuki-portifolio/commit/69cbe9699d9bb663d271abd5e176731984038438" }, { label: "Ver a recuperação da identidade e os ajustes", href: "https://github.com/NicolasSuzuki/NicolasSuzuki-portifolio/commit/3033eebe8082ffc82986b46d8d2cfb1367ac7793" }],
-    },
-  },
-  en: {
-    "skills-lab": {
-      name: "Skills Lab", title: "From an inherited frontend to an evolving platform.", kind: "Freelance · Product and full-stack development", intro: "Organizing an idea, aligning the journey with the founders and connecting the experience to a real application foundation. A selection of work documented between August and November 2026.", role: "MVP definition, Figma wireframes, client alignment, architecture and AI-assisted full-stack development, review and validation.", status: "In development and testing", stack: ["React", "TypeScript", "NestJS", "Prisma", "PostgreSQL", "Figma"],
-      stages: [
-        { title: "Understand the starting point", text: "I inherited a frontend with demonstration pages, simulated data and local state. I mapped its workflows through low-fidelity wireframes to understand what existed and establish a visual foundation for product discussions." },
-        { title: "Shape the MVP with the clients", text: "I helped focus the first release on a B2C communication and public-speaking journey. Conversations, documents and wireframes supported separating discovery and purchase from onboarding and the learning routine. I translated agreements into requirements and tasks." },
-        { title: "Evolve the wireframes", text: "The proposal detailed assessment, an initial presentation, practice, feedback, a final challenge, progress and a development plan. Wireframes made behavior and scope discussable before visual polish. They record proposals at that point in time; some rules later changed." },
-        { title: "Connect the experience to implementation", text: "I contributed to selecting NestJS, Prisma and PostgreSQL, using Controller → Service → Repository organization and incremental delivery. Work included authentication, sessions, persisted journeys, integrations and a content and participant backoffice. I used AI while directing context, reviews and checks." },
-        { title: "Review and validate", text: "I translated founder feedback into workflow and interface changes. QA reports record tests with a real API and database covering progress, resumed drafts, private videos, development plans and certificates on desktop and an emulated mobile device. Visual review also covered interface states, keyboard interaction and automated accessibility checks." },
+      "name": "Este portfólio",
+      "title": "Como revisei uma entrega feita com IA.",
+      "kind": "Código público · Processo de desenvolvimento",
+      "intro": "Usei IA para construir este portfólio, mas também precisei avaliar o resultado e corrigir a direção. O histórico público permite acompanhar essa mudança.",
+      "role": "Definição do objetivo, referências, conteúdo e revisão visual e técnica.",
+      "status": "Publicado · Código público",
+      "stack": [
+        "Next.js",
+        "TypeScript",
+        "Português / English",
+        "Static export"
       ],
-      evidence: [
-        { src: "/cases/skills-lab/as-is.png", width: 1024, height: 735, title: "Mapping the inherited experience", alt: "Low-fidelity wireframe of the existing public hub with an introduction and learning verticals", text: "The ComoEsta hoje page maps the inherited frontend. This is an analysis wireframe, not an application screenshot.", source: "https://www.figma.com/design/ETxeJ5InqQAXxoVXFCCrLV?node-id=5-3" },
-        { src: "/cases/skills-lab/journey.png", width: 2700, height: 1760, title: "From screens to a journey", alt: "Proposed journey map: discovery, purchase, access, onboarding, learning and completion", text: "The later version makes user roles and next actions explicit. External feedback is a requirement in this wireframe; it later became optional according to QA records. The map represents a stage of the process. Original wireframe text is in Portuguese.", source: "https://www.figma.com/design/wHIxu3tb3m60tluuLrCozb?node-id=10-2" },
-        { src: "/cases/skills-lab/onboarding.png", width: 760, height: 560, title: "Turning a conversation into a workflow", alt: "Me conheça onboarding wireframe with a communication-challenge question, choices, continue and save-for-later actions", text: "Onboarding details questions, choices and resumption. This makes behavior discussable with the clients before implementation. Original wireframe text is in Portuguese.", source: "https://www.figma.com/design/wHIxu3tb3m60tluuLrCozb?node-id=47-4" },
-      ], result: "Documented work connects a simulated prototype to persisted, tested workflows, an administration area and preparation for closed online testing. Wireframes and requirements established a shared reference for delivery discussions with the founders.", limits: "Tests demonstrate functionality in exercised scenarios, not commercial impact or learning outcomes. Live payments and email, production media operations and part of the pedagogical validation remained pending in the reviewed period. Participant data, test accounts and internal documents are not published.",
+      "stages": [
+        {
+          "title": "Dar contexto",
+          "text": "Forneci meu histórico, referências e os limites do que poderia apresentar sobre cada projeto."
+        },
+        {
+          "title": "Rever a proposta",
+          "text": "Depois de avaliar um redesign editorial, preferi recuperar a identidade anterior. Mantive as melhorias de recrutamento que faziam sentido, como currículo bilíngue e contribuição individual nos cases."
+        },
+        {
+          "title": "Conferir a entrega",
+          "text": "Revisei a implementação, os idiomas, a navegação por teclado e os tamanhos de tela. Os commits abaixo registram as duas direções visuais."
+        }
+      ],
+      "result": "O código público mostra como transformei referências e feedback em uma entrega revisada, incluindo uma mudança de direção durante o desenvolvimento.",
+      "limits": "A IA participou da implementação. A escolha do que manter e os critérios de aceite continuaram sob minha responsabilidade.",
+      "links": [
+        {
+          "label": "Comparar o redesign editorial",
+          "href": "https://github.com/NicolasSuzuki/NicolasSuzuki-portifolio/commit/69cbe9699d9bb663d271abd5e176731984038438"
+        },
+        {
+          "label": "Ver a recuperação da identidade e os ajustes",
+          "href": "https://github.com/NicolasSuzuki/NicolasSuzuki-portifolio/commit/3033eebe8082ffc82986b46d8d2cfb1367ac7793"
+        }
+      ]
+    }
+  },
+  "en": {
+    "skills-lab": {
+      "name": "Skills Lab",
+      "title": "From a prototype to a journey that saves progress.",
+      "kind": "Freelance · Product and full-stack development",
+      "intro": "I inherited a frontend with demonstration screens and simulated data. As a freelancer, I helped define the MVP with the founders and worked on evolving the journey into an application with an API, database and resumable activities.",
+      "role": "Full-stack development, MVP definition, wireframes and client alignment, using AI during implementation and review.",
+      "status": "MVP in development and testing",
+      "stack": [
+        "React",
+        "TypeScript",
+        "NestJS",
+        "Prisma",
+        "PostgreSQL",
+        "Figma"
+      ],
+      "stages": [
+        {
+          "title": "Understand the starting point",
+          "text": "I mapped the inherited frontend through wireframes to discuss workflows with the founders. I turned those product decisions into requirements and tasks."
+        },
+        {
+          "title": "Connect the stages",
+          "text": "I worked on authentication, journey persistence, integrations and the backoffice using React, NestJS, Prisma and PostgreSQL."
+        },
+        {
+          "title": "Review behavior",
+          "text": "Alongside the screens, I reviewed what happens when someone saves, leaves, returns and completes a stage. The development plan connects interface, API and journey rules."
+        }
+      ],
+      "evidence": [
+        {
+          "src": "/cases/skills-lab/as-is.png",
+          "width": 1024,
+          "height": 735,
+          "title": "Mapping the inherited experience",
+          "alt": "Low-fidelity wireframe of the existing public hub with an introduction and learning verticals",
+          "text": "The ComoEsta hoje page maps the inherited frontend. This is an analysis wireframe, not an application screenshot.",
+          "source": "https://www.figma.com/design/ETxeJ5InqQAXxoVXFCCrLV?node-id=5-3"
+        },
+        {
+          "src": "/cases/skills-lab/journey.png",
+          "width": 2700,
+          "height": 1760,
+          "title": "From screens to a journey",
+          "alt": "Proposed journey map: discovery, purchase, access, onboarding, learning and completion",
+          "text": "The later version makes user roles and next actions explicit. External feedback is a requirement in this wireframe; it later became optional according to QA records. The map represents a stage of the process. Original wireframe text is in Portuguese.",
+          "source": "https://www.figma.com/design/wHIxu3tb3m60tluuLrCozb?node-id=10-2"
+        },
+        {
+          "src": "/cases/skills-lab/onboarding.png",
+          "width": 760,
+          "height": 560,
+          "title": "Turning a conversation into a workflow",
+          "alt": "Me conheça onboarding wireframe with a communication-challenge question, choices, continue and save-for-later actions",
+          "text": "Onboarding details questions, choices and resumption. This makes behavior discussable with the clients before implementation. Original wireframe text is in Portuguese.",
+          "source": "https://www.figma.com/design/wHIxu3tb3m60tluuLrCozb?node-id=47-4"
+        }
+      ],
+      "result": "The journey evolved from demonstration screens into persisted workflows with functional checks. In the development plan, learners can resume a partial edit rather than relying only on a confirmed item.",
+      "limits": "The MVP remains in development. Live payments and email, production media operations and part of the pedagogical validation were still outstanding in this selection.",
+      "productImages": [
+        {
+          "src": "/cases/skills-lab/application-pdi.png",
+          "width": 1440,
+          "height": 1000,
+          "title": "The development plan in the application",
+          "alt": "Real Skills Lab screen showing a completed development plan with an example action",
+          "text": "Captured on 8 October 2026 in a test environment with example content. It shows the completed plan at that stage; the subsequent draft evolution is described below. The original interface is in Portuguese."
+        }
+      ],
+      "outcomes": [
+        {
+          "title": "Continue later",
+          "text": "Opening the plan restores its draft, including the item being edited."
+        },
+        {
+          "title": "Finalize at the right time",
+          "text": "The API checks prerequisites and prevents finalization while an edit remains unfinished."
+        },
+        {
+          "title": "A shared reference",
+          "text": "Wireframes and requirements supported scope and behavior discussions with the founders."
+        }
+      ]
     },
-    awaken: {
-      name: "Awaken", title: "Different universes. The same workout experience.", kind: "Personal project · Built with my brother", intro: "A fitness application with progression and distinct visual identities. The frontend challenge is to give each universe personality while keeping behavior, data and rules consistent.", role: "Frontend, infrastructure, experience and theme decisions. Collaboration with my brother, who handles the backend.", status: "In development · Full integration pending", stack: ["Next.js", "TypeScript", "PWA", "Design System", "API contracts"],
-      stages: [
-        { title: "Compare the plan with actual work", text: "In the planning history, I requested a comparison of the product guide, sprints and existing code. The review separated implemented frontend, contracts, backend, integration and QA, avoiding treating mocked screens as completed journeys." },
-        { title: "Go beyond a change of colors", text: "I questioned how similar the themes looked and requested specific work on tokens, typography, language, components and states. Current documentation organizes Hunter, Fitness, Spotlight and Vigil through semantic tokens and an intent-based copy dictionary." },
-        { title: "Keep rules consistent across universes", text: "The architectural decision separates presentation from domain: changing a universe changes composition and visible names while preserving progress, permissions and contracts. Shared components consume tokens rather than spreading theme conditions throughout the code." },
-        { title: "Make integration and connection limits explicit", text: "Documentation defines the API as the authority for business rules and describes HttpOnly cookie sessions through the Next.js server. The offline strategy avoids caching mutations and silent resubmission; actions are explicitly retried after reconnection. Integrated validation remains necessary." },
-      ], flow: ["Shared rule", "Semantic component", "Theme and language", "Same user action"], result: "The history supports my work on frontend direction, infrastructure and delivery planning. Local documents record themed components, contracts and local checks, with specific integration and beta criteria.", limits: "This is a selection of decisions from the history and local documentation. Full integration, authenticated end-to-end flows and real-device verification were pending in the reviewed records. These decisions do not establish a finished product, and my brother's backend work is not attributed to me.",
+    "assisted-form": {
+      "name": "Assisted form",
+      "title": "Suggest the initial values. Leave the decision to the user.",
+      "kind": "Corporate experience · Anonymized selection",
+      "intro": "The client requested a form populated entirely from an event. I proposed keeping the values editable and explaining that they were suggestions. I implemented that behavior.",
+      "role": "Proposed and implemented editable initial values with a user notice.",
+      "status": "Implemented on a client project",
+      "stack": [
+        "Frontend",
+        "Forms",
+        "Assisted input",
+        "Product thinking"
+      ],
+      "stages": [
+        {
+          "title": "Reconsider the request",
+          "text": "I suggested offering the initial values as a useful starting point while letting users adapt the content."
+        },
+        {
+          "title": "Give the prompt context",
+          "text": "I proposed combining the event title with a predefined phrase and starting this composition in the frontend."
+        },
+        {
+          "title": "Plan the evolution",
+          "text": "For broader personalization and comparison through metrics, I proposed a backend evolution. That remained a next step."
+        }
+      ],
+      "result": "The form gained initial values that users can review. My contribution was to propose and implement that behavior while preserving the user's decision.",
+      "limits": "I keep the client's identity, screens and code private. The portfolio's interactive example uses fictional text and does not execute AI. No impact metrics are available for this selection.",
+      "outcomes": [
+        {
+          "title": "An editable start",
+          "text": "Initial values help users begin and remain available for review."
+        },
+        {
+          "title": "A clear notice",
+          "text": "The notice explains that the content is a suggestion."
+        }
+      ]
+    },
+    "awaken": {
+      "name": "Awaken",
+      "title": "Different universes. The same workout experience.",
+      "kind": "Personal project · Built with my brother",
+      "intro": "I develop Awaken's frontend and handle infrastructure with my brother, who owns the backend. The application brings together workouts, progression and distinct visual identities.",
+      "role": "Frontend, infrastructure, integration contracts, experience and theme decisions.",
+      "status": "Local integration validated · Preparing for beta",
+      "stack": [
+        "Next.js",
+        "TypeScript",
+        "Design System",
+        "PWA",
+        "API contracts"
+      ],
+      "stages": [
+        {
+          "title": "Build against contracts",
+          "text": "I used contracts and mocks to advance the interfaces while the backend evolved. A later local audit exercised the main flow with a real API and PostgreSQL."
+        },
+        {
+          "title": "Separate change from continuity",
+          "text": "I organized appearance into semantic tokens and vocabulary into typed dictionaries. Components can adapt presentation without owning workout rules."
+        },
+        {
+          "title": "Use failures to define the next step",
+          "text": "The audit also identified failure-recovery, local-data and keyboard issues. Those scenarios became criteria to address before beta."
+        }
+      ],
+      "result": "The frontend supports four visual universes with separate preferences and language. The main integration has been exercised locally; the next step is to fix beta blockers and validate on real devices.",
+      "limits": "The application is not yet beta-ready. Failure recovery, local-data isolation and keyboard behavior need work; real devices and deployed infrastructure remain outstanding.",
+      "productImages": [
+        {
+          "src": "/cases/awaken/application-checkin.png",
+          "width": 1082,
+          "height": 2202,
+          "title": "Recording activity on mobile",
+          "alt": "Real Awaken screen with a synthetic audit account showing quick check-in, exercise and plan options",
+          "text": "Captured during the 23 November 2026 local audit using fictional account data. The screen offers different ways to record a workout. The original interface is in Portuguese."
+        }
+      ],
+      "outcomes": [
+        {
+          "title": "Four identities",
+          "text": "Fitness, Hunter, Spotlight and Vigil share components and contracts."
+        },
+        {
+          "title": "Independent preferences",
+          "text": "Visual theme and language are handled separately, with compatibility for legacy values."
+        },
+        {
+          "title": "An integrated flow",
+          "text": "Registration, plans, workouts and publishing were checked against an API and PostgreSQL locally."
+        }
+      ]
     },
     "portfolio-com-ia": {
-      name: "This portfolio", title: "How I guided an AI-assisted delivery — and revised the direction.", kind: "Public code · Development process", intro: "A verifiable example of context, evaluation and course correction. AI contributed to implementation; direction and acceptance decisions were mine.", role: "Defining the goal, content constraints and references, evaluating the design and directing revisions.", status: "Published · Public code", stack: ["Next.js", "TypeScript", "Português / English", "Static export"],
-      stages: [
-        { title: "Establish context and limits", text: "I provided my background, references and the correct relationship between projects. I defined what could be presented publicly and asked AI to describe my process responsibly without inventing results." },
-        { title: "Explore an alternative", text: "An editorial redesign replaced the monogram-led opening with an oversized name and reorganized the projects. It was implemented and published for evaluation. Its commit preserves the alternative in code." },
-        { title: "Evaluate and correct the direction", text: "After evaluating the whole, I explained that I preferred the earlier version. We recovered that identity and added recruitment improvements: a clear specialty, accessible experience, bilingual résumés and individual contributions in the cases." },
-        { title: "Verify before accepting", text: "Implementation was checked through TypeScript, static build, languages, keyboard navigation, dialog focus return and 390, 768 and 1280 px layouts. Deployment and public files were also checked. These controls cover defined scenarios without guaranteeing an absence of defects." },
-      ], result: "The example shows my role in defining the problem, judging the proposal and reviewing delivery. Public code and commit history allow comparison without exposing client projects.", limits: "No AI productivity metrics are claimed. An implemented suggestion still needs evaluation for behavior, maintainability and fit with the goal. These commits are process evidence, not a measure of professional impact.", links: [{ label: "Inspect the editorial redesign", href: "https://github.com/NicolasSuzuki/NicolasSuzuki-portifolio/commit/69cbe9699d9bb663d271abd5e176731984038438" }, { label: "Inspect the identity restoration and improvements", href: "https://github.com/NicolasSuzuki/NicolasSuzuki-portifolio/commit/3033eebe8082ffc82986b46d8d2cfb1367ac7793" }],
-    },
-  },
+      "name": "This portfolio",
+      "title": "How I reviewed an AI-assisted delivery.",
+      "kind": "Public code · Development process",
+      "intro": "I used AI to build this portfolio, and also needed to evaluate the result and change direction. The public history records that evolution.",
+      "role": "Defined the goal, references and content, and reviewed the visual and technical delivery.",
+      "status": "Published · Public code",
+      "stack": [
+        "Next.js",
+        "TypeScript",
+        "Português / English",
+        "Static export"
+      ],
+      "stages": [
+        {
+          "title": "Provide context",
+          "text": "I shared my background, references and the boundaries of what I could present about each project."
+        },
+        {
+          "title": "Review the proposal",
+          "text": "After evaluating an editorial redesign, I preferred restoring the earlier identity. I retained useful recruitment improvements such as bilingual résumés and individual contributions in the cases."
+        },
+        {
+          "title": "Check the delivery",
+          "text": "I reviewed the implementation, languages, keyboard navigation and screen sizes. The commits below preserve both visual directions."
+        }
+      ],
+      "result": "The public code shows how I turned references and feedback into a reviewed delivery, including a change of direction during development.",
+      "limits": "AI contributed to implementation. What to keep and the acceptance criteria remained my responsibility.",
+      "links": [
+        {
+          "label": "Inspect the editorial redesign",
+          "href": "https://github.com/NicolasSuzuki/NicolasSuzuki-portifolio/commit/69cbe9699d9bb663d271abd5e176731984038438"
+        },
+        {
+          "label": "Inspect the identity restoration and improvements",
+          "href": "https://github.com/NicolasSuzuki/NicolasSuzuki-portifolio/commit/3033eebe8082ffc82986b46d8d2cfb1367ac7793"
+        }
+      ]
+    }
+  }
 };

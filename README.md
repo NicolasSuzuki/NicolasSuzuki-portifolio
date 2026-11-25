@@ -21,15 +21,16 @@ npm run build
 npm start
 ```
 
-O build gera um site estático em `dist/`. `npm start` serve esse build localmente. Não há banco, formulário, rastreadores ou credenciais no frontend.
+O build gera um site estático em `dist/`. `npm start` serve esse build localmente. Não há banco, envio de formulários, rastreadores ou credenciais no frontend. A demonstração do formulário funciona apenas no navegador.
 
 ## Estrutura
 
 - `src/content/portfolio.ts`: dados, textos, idiomas e cases.
-- `src/components/portfolio.tsx`: página, navegação, previews ilustrativos e dialog de detalhes.
+- `src/content/resume.ts`: redação dos currículos, competências por área e contribuições por experiência, baseadas no conteúdo público.
+- `src/components/portfolio.tsx`: página, navegação, capturas dos projetos e links diretos para os cases.
 - `src/components/case-study.tsx` e `src/content/case-studies.ts`: páginas completas, etapas, evidências e traduções dos cases.
 - `src/app/cases/[slug]/` e `src/app/en/cases/[slug]/`: exportação estática dos cases em português e inglês.
-- `public/cases/skills-lab/`: recortes reais dos wireframes do Figma, com contexto e origem no case.
+- `public/cases/`: capturas reais de Skills Lab e Awaken com dados de teste; wireframes históricos do Skills Lab.
 - `public/fonts/`: fontes locais e licenças SIL Open Font License.
 - `public/downloads/`: currículos em português e inglês, com texto selecionável e links.
 - `scripts/generate-resumes.mjs` e `scripts/generate_resumes.py`: geração dos currículos a partir do conteúdo público do site.
@@ -43,25 +44,25 @@ O build gera um site estático em `dist/`. `npm start` serve esse build localmen
 
 Fundo grafite, contraste em verde claro, tipografia editorial, monograma construído em código e projetos com composições visuais próprias. DM Sans e Manrope são servidas localmente, com preload, fontes de sistema como fallback e licenças em `public/fonts/`.
 
-Os previews dos projetos são ilustrações, identificadas como tal. Não representam screenshots nem comprovam entregas. Os detalhes de cada case informam contexto, participação, escopo e estado atual.
+Skills Lab e Awaken mostram capturas reais dos ambientes de teste, com data e contexto nas legendas. O formulário assistido usa uma demonstração independente com dados fictícios. Os cases informam participação individual, decisões e estágio atual.
 
-Skills Lab e Awaken têm modais resumidos e páginas completas. Skills Lab apresenta cinco etapas e três recortes de wireframes; as legendas distinguem propostas históricas das regras posteriores. Awaken apresenta decisões de frontend, temas e infraestrutura com limites de integração. O case deste portfólio mostra uso de IA, revisão de direção e commits públicos. Todos possuem versões em português e inglês, links de retorno e navegação por seções.
+Os cards de Skills Lab, Formulário assistido e Awaken abrem diretamente suas páginas completas em português e inglês. As seções de engenharia apresentam problema, implementação, escolhas, fluxo e evidências de verificação. O formulário inclui uma demonstração local com dados fictícios. Skills Lab apresenta uma comparação entre versões do PDI, resultados observáveis e três recortes de wireframes históricos; as legendas distinguem propostas das regras posteriores. Awaken apresenta decisões de frontend, temas e infraestrutura com limites de integração. O case deste portfólio mostra uso de IA, revisão de direção e commits públicos. Todos possuem versões em português e inglês, links de retorno e navegação por seções.
 
 As imagens dos wireframes preservam o idioma original. A versão inglesa contém descrição e contexto traduzidos. Os arquivos internos e o histórico bruto dos projetos não são distribuídos.
 
-A seleção distingue Skills Lab (freelance), uma plataforma educacional (experiência corporativa anonimizada) e Awaken (projeto pessoal com o irmão de Nicolas). Os cases corporativos não são associados aos empregadores da timeline.
+A seleção distingue Skills Lab (freelance), um formulário assistido (experiência corporativa anonimizada) e Awaken (projeto pessoal com o irmão de Nicolas). Os cases corporativos não são associados aos empregadores da timeline.
 
 A seção **IA no processo. Critério na entrega.** apresenta como uso IA em investigação, prototipação, desenvolvimento e revisão, com definição de contexto, critérios de aceite e verificação técnica das entregas.
 
 A revisão para recrutamento preserva essa base visual e destaca especialidade, contribuição individual, estágio dos projetos, decisões e validações. O idioma pode ser compartilhado por `?lang=pt` ou `?lang=en`; a URL tem precedência sobre a preferência salva. Currículo e atalhos para experiência e código público ficam na abertura.
 
-Os currículos usam os mesmos textos do site, com experiência selecionada e os anos já publicados. Não afirmam conclusão universitária, métricas de impacto, disponibilidade ou autorização de trabalho por país. Para regenerar após revisar o conteúdo, instale `reportlab` e `pypdf` em um ambiente Python e execute `npm run resumes`. A variável opcional `PORTFOLIO_PYTHON` aponta para o executável desejado. Os PDFs finais são gerados em `output/pdf/` e copiados para `public/downloads/`; o Render usa os arquivos versionados e não precisa executar Python.
+Os currículos reutilizam os dados públicos de identidade, cargos, períodos, formação e estágios dos projetos. A redação específica em `src/content/resume.ts` detalha contribuições e organiza competências por área, com links para os cases e uma página por idioma. A conclusão do Bacharelado em Ciências e Tecnologia na UNIFESP em 2025 foi confirmada diretamente por Nicolas. Não afirmam métricas de impacto, disponibilidade ou autorização de trabalho por país. Para regenerar após revisar o conteúdo, instale `reportlab` e `pypdf` em um ambiente Python e execute `npm run resumes`. A variável opcional `PORTFOLIO_PYTHON` aponta para o executável desejado. Os PDFs finais são gerados em `output/pdf/` e copiados para `public/downloads/`; o Render usa os arquivos versionados e não precisa executar Python.
 
 A avaliação editorial e as informações ainda pendentes estão em [RECRUITING_REVIEW.md](RECRUITING_REVIEW.md).
 
 ## Publicação
 
-O projeto foi preparado para exportação estática. A indexação está desativada em `src/app/layout.tsx` enquanto o conteúdo está em revisão; antes de publicar um site, definir o endereço definitivo e atualizar metadados e indexação.
+O projeto é publicado como exportação estática em [nicolassuzuki-portifolio.onrender.com](https://nicolassuzuki-portifolio.onrender.com). A configuração atual mantém a indexação desativada em `src/app/layout.tsx`.
 
 O projeto pode ser hospedado em qualquer plataforma compatível com os arquivos de `dist/`, mantendo os assets de `_next/`.
 
@@ -100,3 +101,19 @@ As notas editoriais locais, os documentos pessoais e as configurações locais d
 ## Fontes do conteúdo
 
 Currículo e exportação do LinkedIn fornecidos pelo Nicolas, resumo consolidado do ChatGPT e registros das conversas dos projetos Skills Lab, uma plataforma educacional anonimizada e Awaken. Os documentos pessoais não são distribuídos no site.
+
+## Revisão técnica dos cases - 25/11/2026
+
+- `src/content/case-engineering.ts`: recortes bilíngues com decisões, fluxos e verificações.
+- `src/components/case-engineering.tsx`: apresentação responsiva das evidências.
+- `src/components/assisted-form-demo.tsx`: exemplo original de pré-preenchimento editável, sem API ou execução de IA.
+- Skills Lab: fluxo do PDI conferido no código e em 7 testes unitários aprovados.
+- Awaken: estágio atualizado pela auditoria local de novembro e 16 testes focados de preferências aprovados nesta revisão. Bloqueios antes do beta permanecem explícitos.
+
+## Evolução editorial - 25/11/2026
+
+- Textos em primeira pessoa e detalhes técnicos expansíveis.
+- Capturas reais de Skills Lab e Awaken, com dados de teste e origem documentada em CASE_EVIDENCE.md.
+- História do rascunho do PDI organizada em antes, minha mudança e depois, conferida no histórico de versões.
+- Resultados de comportamento separados de métricas de impacto ainda não disponíveis.
+- Next.js atualizado para 16.4.6; typecheck, build estático e auditoria de dependências aprovados.

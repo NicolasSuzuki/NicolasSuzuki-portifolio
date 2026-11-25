@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { content, profile, recruitingCopy, type Locale } from "@/content/portfolio";
+import { studyPath } from "@/content/case-studies";
 
 function Arrow({ diagonal = false, className = "" }: { diagonal?: boolean; className?: string }) {
   return <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d={diagonal ? "M5 19 19 5M5 5h14v14" : "M4 12h16m-6-6 6 6-6 6"} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
@@ -19,31 +20,23 @@ function Monogram() {
 }
 
 function ProjectPreview({ type, locale }: { type: string; locale: Locale }) {
-  const p = content[locale].preview;
-  if (type === "learning") return <div className="project-visual learning-visual" aria-hidden="true">
-    <div className="learning-orbit orbit-a"/><div className="learning-orbit orbit-b"/>
-    <div className="learning-window"><div className="window-bar"><div className="window-dots"><i/><i/><i/></div><span>skills lab<span className="brand-star">✳</span></span><div className="avatar-dot">N</div></div>
-      <div className="learning-body"><div className="mock-sidebar"><span className="sidebar-square active"/><span className="sidebar-square"/><span className="sidebar-square"/><span className="sidebar-square"/><span className="sidebar-square last"/></div><div className="lesson-content"><span className="mock-greeting">{p.lesson} <span>↗</span></span><div className="lesson-banner"><span className="mock-small-label">{p.module}</span><strong>{p.lessonTitle}</strong><div className="lesson-art"><i/><i/><i/><i/></div><div className="mock-continue">{p.continue} <Arrow/></div></div><div className="lesson-bottom"><div><span className="practice-symbol">↗</span><span>{p.practice}</span></div><div className="mock-progress"><i/><i/><i/><i/><i/></div></div></div></div>
-    </div><span className="preview-corner">LEARNING, BY DESIGN.</span>
+  if (type === "learning") return <div className="project-visual screenshot-preview" aria-hidden="true">
+    <img src="/cases/skills-lab/application-pdi.png" width="1440" height="1000" alt="" loading="lazy" decoding="async"/>
   </div>;
-  if (type === "education") return <div className="project-visual education-visual" aria-hidden="true"><div className="education-word">Ideias.</div><div className="document-sheet sheet-back"/><div className="document-sheet"><div className="document-brand">{p.educationBrand}<span>{p.educationBrandSub}</span><span className="document-spark">✦</span></div><span className="document-type">{p.document}</span><strong>{p.documentSub}</strong><div className="document-rule"/><div className="document-lines"><i/><i/><i/><i/></div><div className="document-box"><span/><div><i/><i/></div></div><div className="document-lines short"><i/><i/><i/></div><span className="document-foot">ENSINAR TRANSFORMA.</span></div><div className="education-floating">PDF <Arrow diagonal/></div></div>;
-  return <div className="project-visual fitness-visual" aria-hidden="true"><div className="fitness-orbit"/><span className="fitness-background">A</span><div className="fitness-device"><div className="device-island"/><span className="fitness-brand">{p.fitness} <span>✧</span></span><div className="fitness-symbol">A<span>↗</span></div><strong>{p.fitnessTitle}</strong><span className="fitness-sub">{p.fitnessSub}</span><div className="fitness-bars"><i/><i/><i/><i/><i/><i/><i/></div><div className="fitness-cta">{p.fitnessAction}<Arrow/></div><div className="device-home"/></div><span className="fitness-coordinate">CONSISTENCY → PROGRESS</span></div>;
+  if (type === "fitness") return <div className="project-visual screenshot-preview awaken-shot" aria-hidden="true">
+    <img src="/cases/awaken/application-checkin.png" width="1082" height="2202" alt="" loading="lazy" decoding="async"/>
+  </div>;
+  return <div className="project-visual form-visual" aria-hidden="true"><div className="form-preview-window"><strong>{locale === "pt" ? "Formulário assistido" : "Assisted form"}</strong><span className="form-preview-label">{locale === "pt" ? "Contexto do evento" : "Event context"}</span><div className="form-preview-value">{locale === "pt" ? "Um ponto de partida para você revisar." : "A starting point for you to review."}</div><p className="form-preview-notice">{locale === "pt" ? "Sugestão editável. A decisão continua com você." : "An editable suggestion. You stay in control."}</p></div></div>;
 }
 
 export default function Portfolio() {
   const [locale, setLocale] = useState<Locale>("pt");
   const [localeLoaded, setLocaleLoaded] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [selected, setSelected] = useState<string | null>(null);
   const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">("idle");
-  const dialogRef = useRef<HTMLDialogElement>(null);
-  const triggerRef = useRef<HTMLButtonElement | null>(null);
   const copyTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const c = content[locale];
   const r = recruitingCopy[locale];
-  const selectedProject = c.projects.find(project => project.id === selected);
-  const detailedCase = selected === "skills-lab" || selected === "awaken";
-  const selectedCase = selectedProject ? r.cases[selectedProject.id as keyof typeof r.cases] : undefined;
 
   useEffect(() => {
     try {
@@ -72,24 +65,6 @@ export default function Portfolio() {
     document.addEventListener("keydown", onEscape);
     return () => document.removeEventListener("keydown", onEscape);
   }, []);
-
-  useEffect(() => {
-    if (selected && dialogRef.current && !dialogRef.current.open) {
-      dialogRef.current.showModal();
-      const previousOverflow = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        dialogRef.current?.close();
-        document.body.style.overflow = previousOverflow;
-      };
-    }
-  }, [selected]);
-
-  const closeProject = () => {
-    dialogRef.current?.close();
-    setSelected(null);
-    requestAnimationFrame(() => triggerRef.current?.focus());
-  };
 
   const copyEmail = async () => {
     try { await navigator.clipboard.writeText(profile.email); setCopyState("copied"); }
@@ -124,7 +99,7 @@ export default function Portfolio() {
 
       <div className="technology-strip" aria-label={locale === "pt" ? "Especialidades" : "Specialties"}><div className="container technology-inner"><span>REACT</span><i>✳</i><span>NEXT.JS</span><i>✳</i><span>TYPESCRIPT</span><i>✳</i><span>DESIGN SYSTEMS</span><i>✳</i><span>MICRO-FRONTENDS</span></div></div>
 
-      <section id="projetos" className="section container" aria-labelledby="projects-title"><div className="section-heading"><div><div className="eyebrow"><span className="section-index">01 /</span>{c.selected}</div><h2 id="projects-title">{c.projectsTitle}</h2></div><p>{c.projectsIntro}</p></div><p className="project-visual-note">{r.visualNote}</p><div className="projects-grid">{c.projects.map((project, i) => <article key={project.id} className={`project-card ${i === 0 ? "featured-project" : ""}`}><div className="project-button"><div className="project-image-wrap"><ProjectPreview type={project.preview} locale={locale}/><span className="illustration-label">{locale === "pt" ? "CONCEITO VISUAL" : "CONCEPT VISUAL"}</span><span className="project-image-arrow"><Arrow diagonal/></span></div><div className="project-info"><div className="project-kind">{project.kind}<span>/{project.number}</span></div><h3><button className="project-title-button" aria-haspopup="dialog" onClick={event => { triggerRef.current = event.currentTarget; setSelected(project.id); }}>{project.name}<Arrow diagonal/></button></h3><p>{project.description}</p><p className="project-role"><strong>{r.roleLabel}:</strong> {r.cases[project.id as keyof typeof r.cases].role}</p><span className="card-stage">{project.statusLabel}</span><div className="project-tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>{i === 0 && <div className="featured-link">{c.openProject}<Arrow/></div>}</div></div></article>)}</div></section>
+      <section id="projetos" className="section container" aria-labelledby="projects-title"><div className="section-heading"><div><div className="eyebrow"><span className="section-index">01 /</span>{c.selected}</div><h2 id="projects-title">{c.projectsTitle}</h2></div><p>{c.projectsIntro}</p></div><p className="project-visual-note">{r.visualNote}</p><div className="projects-grid">{c.projects.map((project, i) => <article key={project.id} className={`project-card ${i === 0 ? "featured-project" : ""}`}><div className="project-button"><div className="project-image-wrap"><ProjectPreview type={project.preview} locale={locale}/><span className="illustration-label">{project.preview === "form" ? (locale === "pt" ? "DEMONSTRAÇÃO" : "DEMONSTRATION") : (locale === "pt" ? "CAPTURA REAL" : "ACTUAL SCREEN")}</span><span className="project-image-arrow"><Arrow diagonal/></span></div><div className="project-info"><div className="project-kind">{project.kind}<span>/{project.number}</span></div><h3><a className="project-title-button" href={studyPath(project.id, locale)}>{project.name}<Arrow diagonal/></a></h3><p>{project.description}</p><p className="project-role"><strong>{r.roleLabel}:</strong> {r.cases[project.id as keyof typeof r.cases].role}</p><span className="card-stage">{project.statusLabel}</span><div className="project-tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>{i === 0 && <div className="featured-link">{c.openProject}<Arrow/></div>}</div></div></article>)}</div></section>
 
       <section id="sobre" className="about-section" aria-labelledby="about-title"><div className="container about-grid"><div className="about-copy"><div className="eyebrow"><span className="section-index">02 /</span>{c.aboutEyebrow}</div><h2 id="about-title">{c.aboutTitle[0]}<br/><em>{c.aboutTitle[1]}</em></h2><div className="about-paragraphs">{c.aboutText.map(text => <p key={text}>{text}</p>)}</div><div className="about-facts"><span>{c.education}</span><span>{c.educationExtra}</span><span>{c.languages}</span></div><p className="volunteer-note">↳ {c.volunteer}</p></div><div className="expertise-list">{c.expertise.map(item => <article className="expertise-item" key={item.number}><span className="expertise-number">{item.number}</span><div><h3>{item.title}</h3><p>{item.description}</p></div><Arrow diagonal/></article>)}</div></div></section>
 
@@ -144,8 +119,5 @@ export default function Portfolio() {
 
     <footer className="site-footer container"><a href="#top" className="footer-name">nicolas suzuki<span>.</span></a><span>© {new Date().getFullYear()} · {c.footer}</span><a href="#top" className="back-top">{c.backTop}<span>↑</span></a></footer>
 
-    <dialog ref={dialogRef} className="project-dialog" aria-labelledby="dialog-title" onCancel={event => { event.preventDefault(); closeProject(); }} onClick={event => { if (event.target === event.currentTarget) closeProject(); }} onClose={() => setSelected(null)}>
-      {selectedProject && <div className="dialog-content"><div className="dialog-top"><span className="eyebrow">{c.projectDetails} / {selectedProject.number}</span><button className="dialog-close" onClick={closeProject} aria-label={c.close} autoFocus>×</button></div><span className="project-kind">{selectedProject.kind}</span><h2 id="dialog-title">{selectedProject.name}</h2><p className="dialog-subtitle">{selectedProject.subtitle}</p><span className="project-status"><span className="status-dot"/>{selectedProject.statusLabel}</span><div className="dialog-sections">{(detailedCase ? [[c.context, selectedProject.context], [c.contribution, selectedCase?.role ?? selectedProject.contribution]] : [[c.context, selectedProject.context], [c.contribution, selectedProject.contribution], [r.decisionsLabel, selectedCase?.decisions ?? ""], [c.scope, selectedProject.scope], [r.validationLabel, selectedCase?.validation ?? ""]]).map(([title, text]) => <section key={title}><h3>{title}</h3><p>{text}</p></section>)}</div>{detailedCase && <a className="button-primary full-case-link" href={(locale === "en" ? "/en" : "") + "/cases/" + selectedProject.id + "/"}>{locale === "pt" ? "Ler case completo" : "Read full case"}<Arrow/></a>}<div className="eyebrow">{c.stack}</div><div className="project-tags dialog-tags">{selectedProject.tags.map(tag => <span key={tag}>{tag}</span>)}</div><a className="button-primary" href={`mailto:${profile.email}?subject=${encodeURIComponent(`${selectedProject.name} — Portfolio`)}`}>{c.nextProject}<Arrow diagonal/></a><p className="dialog-note">{c.detailNote}</p></div>}
-    </dialog>
   </>;
 }
